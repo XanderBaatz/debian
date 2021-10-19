@@ -27,8 +27,3 @@ EOF"
 
 # update sources
 sudo apt update
-
-#sed -i 's/original/new/g' file.txt
-#conm=$(eval "dpkg --status tzdata|grep Provides|cut -f2 -d'-'")
-# Append backports to end of sources.list
-#echo 'text here' >> /etc/apt/sources.list
