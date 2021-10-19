@@ -1,4 +1,5 @@
 #!/bin/sh
+# wget -qO- https://git.io/J6nue | sudo sh
 
 set -e
 
