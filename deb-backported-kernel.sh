@@ -4,9 +4,9 @@
 set -e
 
 #variables
-i_pkg=""
-nm_conf="/etc/NetworkManager/NetworkManager.conf"
 _arch=$(dpkg --print-architecture)
+i_pkg="linux-image-${_arch} firmware-linux firmware-linux-nonfree"
+nm_conf="/etc/NetworkManager/NetworkManager.conf"
 
 #install network-manager
 sudo apt install --no-install-recommends --no-install-suggests -y ${i_pkg}
@@ -17,4 +17,4 @@ if [ $(dpkg-query -W -f='${Status}' ${i_pkg} | grep -q -P '^install ok installed
   exit $1
 fi
 
-linux-image-${_arch} firmware-linux firmware-linux-nonfree
+
