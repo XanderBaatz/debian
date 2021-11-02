@@ -29,6 +29,3 @@ for d in $(nmcli -t dev | awk '/unmanaged/ && !/loopback/' | cut -f1 -d':'); do
   sudo nmcli dev set $d managed no;
   sudo nmcli dev set $d managed yes
 done
-
-#reload system daemon (services etc.)
-sudo systemctl daemon-reload
