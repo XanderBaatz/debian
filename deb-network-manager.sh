@@ -3,8 +3,9 @@
 
 set -e
 
-#check package: network-manager
+#variables
 i_pkg="network-manager"
+nm_conf="/etc/NetworkManager/NetworkManager.conf"
 
 #install network-manager
 sudo apt install --no-install-recommends --no-install-suggests -y ${i_pkg}
@@ -16,8 +17,8 @@ if [ $(dpkg-query -W -f='${Status}' ${i_pkg} | grep -q -P '^install ok installed
 fi
 
 #let ifupdown manage network-manager
-sudo cp /etc/NetworkManager/NetworkManager.conf /etc/NetworkManager/NetworkManager.conf.bak
-sudo sed '/managed/s/false/true/' /etc/NetworkManager/NetworkManager.conf > /etc/NetworkManager/NetworkManager.conf
+sudo cp ${nm_conf} ${nm_conf}.bak
+sudo sed '/managed/s/false/true/' ${nm_conf} > ${nm_conf}
 
 #enable and restart networkmanager service
 sudo systemctl enable NetworkManager.service
