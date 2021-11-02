@@ -6,24 +6,25 @@ set -e
 #variables
 _arch=$(dpkg --print-architecture)
 ver_name=$(cat /etc/*-release | grep VERSION_CODENAME | cut -f2 -d'=')
+repo_url=$(cat /etc/apt/sources.list | grep -o "http[^']\+${dist_name}" | head -1)
+component="main contrib non-free"
+
+#kernel and firmware to install from backports
 i_pkg="linux-image-${_arch} firmware-linux firmware-linux-nonfree"
 
-#update sources and check if backports are enabled
-read -p "Do you want to continue? [Y/n] " -n 1 -r
-echo    # (optional) move to a new line
-if [[ ! $REPLY =~ ^[Yy]$ ]]
-then
-		echo "You said no, aborting..."
-    [[ "$0" = "$BASH_SOURCE" ]] && exit 1 || return 1 # handle exits from shell or function but don't exit interactive shell
-fi
-
-echo "You said yes, continuing..."
-
 if [ $(sudo apt update | grep "${ver_name}-backports"; echo $?) != "0" ]; then
-  echo "Unable to install ${i_pkg} , aborting."
+    echo "Debian ${ver_name}-backports not enabled."
+    read -p "Do you want to enable and continue? [Y/n] " -n 1 -r
+    echo
+    if [[ ! $REPLY =~ ^[Yy]$ ]]
+    then
+        echo "You said no, aborting..."
+        [[ "$0" = "$BASH_SOURCE" ]] && exit 1 || return 1
+    else
+        sudo echo "deb ${repo_url} ${ver_name}-backports ${component}" >> /etc/apt/sources.list 2>&1 && \
+        sudo apt update -y
+    fi
 fi
 
 #install network-manager
-sudo apt install --no-install-recommends --no-install-suggests -y ${i_pkg}
-
-#exit if network-manager isn't installed
+sudo apt install -t ${ver_name}-backports -y ${i_pkg}
