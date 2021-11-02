@@ -18,7 +18,7 @@ if [ $(sudo apt update | grep "${ver_name}-backports"; echo $?) != "0" ]; then
     echo
     if [[ ! $REPLY =~ ^[Yy]$ ]]
     then
-        echo "You said no, aborting..."
+        echo "Abort."
         [[ "$0" = "$BASH_SOURCE" ]] && exit 1 || return 1
     else
         sudo echo "deb ${repo_url} ${ver_name}-backports ${component}" >> /etc/apt/sources.list 2>&1 && \
