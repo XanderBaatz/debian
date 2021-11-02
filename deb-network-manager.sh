@@ -24,9 +24,13 @@ sudo sed '/managed/s/false/true/' ${nm_conf}.bak > ${nm_conf}
 sudo systemctl enable NetworkManager.service
 sudo systemctl restart NetworkManager.service
 
+#reconnect networkmanager
+sudo nmcli networking off && nmcli networking on
+
 #enable networkmanager devices to make use of ifupdown, and fix "connected (externally)"
 for d in $(nmcli -t dev | awk '/unmanaged/ && !/loopback/' | cut -f1 -d':'); do
   sudo nmcli dev set $d managed no;
-  sudo nmcli dev set $d managed yes;
-  sudo nmcli device reapply $d
+  sudo nmcli dev set $d managed yes
 done
+
+#sudo nmcli device reapply $d
