@@ -1,4 +1,4 @@
-!/bin/bash
+#!/bin/bash
 # wget -qO- https://git.io/Jily6 | sudo sh
 
 set -e
