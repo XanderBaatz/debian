@@ -7,7 +7,6 @@ set -e
 _arch=$(dpkg --print-architecture)
 ver_name=$(cat /etc/*-release | grep VERSION_CODENAME | cut -f2 -d'=')
 i_pkg="linux-image-${_arch} firmware-linux firmware-linux-nonfree"
-nm_conf="/etc/NetworkManager/NetworkManager.conf"
 
 #update sources and check if backports are enabled
 if [ $(sudo apt update | grep "${ver_name}-backports"; echo $?) != "0" ]; then
