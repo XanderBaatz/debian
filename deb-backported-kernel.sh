@@ -12,7 +12,9 @@ component="main contrib non-free"
 #kernel and firmware to install from backports
 i_pkg="linux-image-${_arch} firmware-linux firmware-linux-nonfree"
 
-if [ $(sudo apt update | grep "${ver_name}-backports"; echo $?) != "0" ]; then
+#if backports aren't enabled prompt to enable so the script can continue
+bp_check=$(sudo apt update | grep "${ver_name}-backports"; echo $?)
+if [ "${bp_check}" != "0" ]; then
     echo "Debian ${ver_name}-backports not enabled."
     read -p "Do you want to enable and continue? [Y/n] " -n 1 -r
     echo
