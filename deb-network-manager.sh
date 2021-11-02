@@ -28,12 +28,5 @@ for d in $(nmcli -t dev | awk '/unmanaged/ && !/loopback/' | cut -f1 -d':'); do
   sudo nmcli dev set $d managed yes
 done
 
-#disable networkd
-#for s in $(systemctl | grep "systemd-networkd." | awk '{print $1}'); do
-#  sudo systemctl disable $s;
-#  sudo systemctl mask $s;
-#  sudo systemctl stop $s
-#done
-
 #reload system daemon (services etc.)
 sudo systemctl daemon-reload
