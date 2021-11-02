@@ -1,5 +1,5 @@
 #!/bin/bash
-# wget -qO- https://git.io/Jily6 | sudo sh
+# wget -qO- https://git.io/JPDf5 | sudo sh
 
 set -e
 
