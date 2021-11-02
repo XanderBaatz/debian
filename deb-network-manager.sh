@@ -17,8 +17,8 @@ if [ $(dpkg-query -W -f='${Status}' ${i_pkg} | grep -q -P '^install ok installed
 fi
 
 #let ifupdown manage network-manager
-sudo cp ${nm_conf} ${nm_conf}.bak
-sudo sed '/managed/s/false/true/' ${nm_conf} > ${nm_conf}
+sudo mv ${nm_conf} ${nm_conf}.bak
+sudo sed '/managed/s/false/true/' ${nm_conf}.bak > ${nm_conf}
 
 #enable and restart networkmanager service
 sudo systemctl enable NetworkManager.service
