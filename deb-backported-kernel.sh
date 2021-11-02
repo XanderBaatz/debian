@@ -19,6 +19,3 @@ fi
 sudo apt install --no-install-recommends --no-install-suggests -y ${i_pkg}
 
 #exit if network-manager isn't installed
-
-
-
