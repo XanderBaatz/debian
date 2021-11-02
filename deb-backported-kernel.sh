@@ -11,7 +11,6 @@ i_pkg="linux-image-${_arch} firmware-linux firmware-linux-nonfree"
 #update sources and check if backports are enabled
 if [ $(sudo apt update | grep "${ver_name}-backports"; echo $?) != "0" ]; then
   echo "Unable to install ${i_pkg} , aborting."
-  exit $1
 fi
 
 #install network-manager
