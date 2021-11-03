@@ -15,20 +15,15 @@ i_pkg="linux-image-${_arch} firmware-linux firmware-linux-nonfree"
 #if backports aren't enabled prompt to enable so the script can continue
 #bp_check=$(egrep -v '^#|^ *$' /etc/apt/sources.list | grep -q ${ver_name}-backports; echo $?)
 bp_check=$(egrep -v '^#|^ *$' /etc/apt/sources.list | grep -q ${ver_name}-backports; echo $?)
+deb_check=$(egrep -v '^#|^ *$' /etc/apt/sources.list | grep -q ${ver_name}-; echo $?)
 #$(cat /etc/apt/sources.list | grep "^[^#]" | grep)
 #$(sudo apt update | grep "${ver_name}-backports"; echo $?)
 if [ ${bp_check} != "0" ]; then
     echo "Debian ${ver_name}-backports not enabled."
-    echo -n "Do you want to enable and continue? [Y/n] "
-    old_stty_cfg=$(stty -g)
-    stty raw -echo ; answer=$(head -c 1) ; stty $old_stty_cfg
-    if echo "$answer" | grep -iq "^y" ;then
-        sudo echo "deb ${repo_url} ${ver_name}-backports ${component}" >> /etc/apt/sources.list 2>&1 && \
-        sudo apt update -y
-    else
-        echo "Abort."
-        exit 1
-    fi
+fi
+
+if [ ${deb_check} != "0" ]; then
+    echo "Debian ${ver_name} is the release."
 fi
 
 #    read -p "Do you want to enable and continue? [Y/n] " -n 1 -r
@@ -43,4 +38,4 @@ fi
 #    fi
 
 #install backported kernel and firmware
-sudo apt install -t ${ver_name}-backports -y ${i_pkg}
+#sudo apt install -t ${ver_name}-backports -y ${i_pkg}
