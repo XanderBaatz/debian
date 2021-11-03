@@ -6,7 +6,7 @@ set -e
 #variables
 _arch=$(dpkg --print-architecture)
 ver_name=$(cat /etc/*-release | grep VERSION_CODENAME | cut -f2 -d'=')
-repo_url=$(cat /etc/apt/sources.list | grep -o "http[^']\+${dist_name}" | head -1)
+repo_url=$(cat /etc/apt/sources.list | grep -o "deb http[^']\+${dist_name}" | head -1 | cut -f2 -d' ')
 component="main contrib non-free"
 
 #kernel and firmware to install from backports
