@@ -21,13 +21,13 @@ if [ ${bp_check} != "0" ]; then
     echo "Debian ${ver_name}-backports not enabled."
     echo -n "Do you want to enable and continue? [Y/n] "
     read answer
-        if [ "$answer" != "${answer#[Yy]}" ] ;then 
-            echo "Abort."
-            exit 1
-        else
-            sudo echo "deb ${repo_url} ${ver_name}-backports ${component}" >> /etc/apt/sources.list 2>&1 && \
-            sudo apt update -y
-        fi
+    if [ "$answer" != "${answer#[Yy]}" ] ;then 
+        echo "Abort."
+        exit 1
+    else
+        sudo echo "deb ${repo_url} ${ver_name}-backports ${component}" >> /etc/apt/sources.list 2>&1 && \
+        sudo apt update -y
+    fi
 fi
 
 #    read -p "Do you want to enable and continue? [Y/n] " -n 1 -r
