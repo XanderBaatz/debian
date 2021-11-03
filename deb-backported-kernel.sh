@@ -16,7 +16,7 @@ i_pkg="linux-image-${_arch} firmware-linux firmware-linux-nonfree"
 bp_check=$(egrep -v '^#|^ *$' /etc/apt/sources.list | grep ${ver_name}-backports)
 #$(cat /etc/apt/sources.list | grep "^[^#]" | grep)
 #$(sudo apt update | grep "${ver_name}-backports"; echo $?)
-if [ ${bp_check} != *"${ver_name}-backports"* ]; then
+if [[ ${bp_check} != *"${ver_name}-backports"* ]]; then
     echo "Debian ${ver_name}-backports not enabled."
     read -p "Do you want to enable and continue? [Y/n] " -n 1 -r
     echo
