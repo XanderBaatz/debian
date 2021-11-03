@@ -20,13 +20,14 @@ bp_check=$(egrep -v '^#|^ *$' /etc/apt/sources.list | grep -q ${ver_name}-backpo
 if [ ${bp_check} != "0" ]; then
     echo "Debian ${ver_name}-backports not enabled."
     echo -n "Do you want to enable and continue? [Y/n] "
-    read answer
-    if [ "$answer" != "${answer#[Yy]}" ] ;then 
-        echo "Abort."
-        exit 1
-    else
+    old_stty_cfg=$(stty -g)
+    stty raw -echo ; answer=$(head -c 1) ; stty $old_stty_cfg
+    if echo "$answer" | grep -iq "^y" ;then
         sudo echo "deb ${repo_url} ${ver_name}-backports ${component}" >> /etc/apt/sources.list 2>&1 && \
         sudo apt update -y
+    else
+        echo "Abort."
+        exit 1
     fi
 fi
 
