@@ -13,10 +13,10 @@ component="main contrib non-free"
 i_pkg="linux-image-${_arch} firmware-linux firmware-linux-nonfree"
 
 #if backports aren't enabled prompt to enable so the script can continue
-bp_check=$(egrep -v '^#|^ *$' /etc/apt/sources.list | grep -q ${ver_name}-backports)
+bp_check=$(egrep -v '^#|^ *$' /etc/apt/sources.list | grep -q ${ver_name}-backports | echo $?)
 #$(cat /etc/apt/sources.list | grep "^[^#]" | grep)
 #$(sudo apt update | grep "${ver_name}-backports"; echo $?)
-if ! ${bp_check}; then
+if [ ${bp_check} != "0" ]; then
     echo "Debian ${ver_name}-backports not enabled."
     read -p "Do you want to enable and continue? [Y/n] " -n 1 -r
     echo
