@@ -33,6 +33,17 @@ fi
 #install network-manager
 sudo apt install -t ${ver_name}-backports -y ${i_pkg}
 
+##########################################
+# /etc/apt/sources.list
+
+
+
+
+
+
+##########################################
+
+
 
 ##########################################
 # /etc/apt/preferences
