@@ -32,3 +32,32 @@ fi
 
 #install network-manager
 sudo apt install -t ${ver_name}-backports -y ${i_pkg}
+
+
+##########################################
+# /etc/apt/preferences
+Package: *
+Pin: release a=stable
+Pin-Priority: 500
+
+Package: *
+Pin: release a=unstable
+Pin-Priority: 100
+
+##########################################
+
+Package: linux-image-${_arch}
+Pin: release a=unstable
+Pin-Priority: 1000
+
+Package: firmware-linux
+Pin: release a=unstable
+Pin-Priority: 1000
+
+Package: firmware-linux-nonfree
+Pin: release a=unstable
+Pin-Priority: 1000
+
+##########################################
+
+sudo apt install -y linux-image-${_arch} firmware-linux firmware-linux-nonfree
