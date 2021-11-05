@@ -33,4 +33,7 @@ for d in $(nmcli -t dev | awk '/unmanaged/ && !/loopback/' | cut -f1 -d':'); do
   sudo nmcli dev set $d managed yes
 done
 
-#sudo nmcli device reapply $d
+#if network-manager is connected and working, remove dhcp
+if [ $(nmcli -t dev | grep -v "loopback" | grep -q -P "connected"; echo $?) = "0" ]; then
+  sudo apt autoremove --purge -y isc-dhcp-client isc-dhcp-common
+fi
