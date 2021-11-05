@@ -78,4 +78,5 @@ Pin-Priority: 1000
 
 ##########################################
 
+sudo sh -c "apt update -y && apt upgrade -y"
 sudo apt install -y linux-image-${_arch} firmware-linux firmware-linux-nonfree
