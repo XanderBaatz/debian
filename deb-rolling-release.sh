@@ -36,10 +36,17 @@ sudo apt install -t ${ver_name}-backports -y ${i_pkg}
 ##########################################
 # /etc/apt/sources.list
 
+deb http://deb.debian.org/ stable ${component}
+deb-src http://deb.debian.org/ stable ${component}
 
+deb http://security.debian.org/ stable-security ${component}
+deb-src http://security.debian.org/ stable-security ${component}
 
+deb http://deb.debian.org/ stable-updates ${component}
+deb-src http://deb.debian.org/ stable-updates ${component}
 
-
+deb http://deb.debian.org/ unstable ${component}
+deb-src http://deb.debian.org/ unstable ${component}
 
 ##########################################
 
