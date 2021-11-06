@@ -20,7 +20,8 @@ i_pkg="linux-image-${_arch} firmware-linux firmware-linux-nonfree"
 
 # backup
 sudo cp /etc/apt/sources.list /etc/apt/sources.list.bak
-sudo cp /etc/apt/preferences /etc/apt/preferences.bak
+#if exists, copy:
+#sudo cp /etc/apt/preferences /etc/apt/preferences.bak
 
 # sources.list generation
 sudo sh -c "cat << EOF > /etc/apt/sources.list
