@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 # wget -qO- https://git.io/JPyUg | sudo sh
 
 set -e
