@@ -45,5 +45,5 @@ if [ $(nmcli -t dev | grep -v "loopback" | grep -q -P "connected"; echo $?) = "0
   sudo sh -c "cat << EOF > /etc/apt/interfaces
   source-directory /etc/network/interfaces.d/*
   EOF"
-  sudo systemctl daemon-reload
+  sudo systemctl restart NetworkManager
 fi
