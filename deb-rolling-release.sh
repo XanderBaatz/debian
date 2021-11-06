@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/env bash
 # wget -qO- https://git.io/JPjey | sudo sh
 # https://www.linuxcapable.com/how-to-install-or-upgrade-to-linux-kernel-5-14-on-debian-11-bullseye/
 
