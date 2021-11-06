@@ -6,55 +6,39 @@ set -e
 
 #variables
 _arch=$(dpkg --print-architecture)
+dist_name=$(uname -n)
 ver_name=$(cat /etc/*-release | grep VERSION_CODENAME | cut -f2 -d'=')
-repo_url=$(cat /etc/apt/sources.list | grep -o "http[^']\+${dist_name}" | head -1)
+#repo_url=$(cat /etc/apt/sources.list | grep -o "deb http[^']\+${dist_name}" | head -1 | cut -f2 -d' ')
 component="main contrib non-free"
 
-#kernel and firmware to install from backports
+#repository URLs
+repo_url="http://deb.debian.org/"
+security_url="http://security.debian.org/"
+
+#kernel and firmware to install from newer repositories
 i_pkg="linux-image-${_arch} firmware-linux firmware-linux-nonfree"
 
-#if backports aren't enabled prompt to enable so the script can continue
-bp_check=$(egrep -v '^#|^ *$' /etc/apt/sources.list | grep ${ver_name}-backports | echo $?)
-#$(cat /etc/apt/sources.list | grep "^[^#]" | grep)
-#$(sudo apt update | grep "${ver_name}-backports"; echo $?)
-if [ ${bp_check} != "0" ]; then
-    echo "Debian ${ver_name}-backports not enabled."
-    read -p "Do you want to enable and continue? [Y/n] " -n 1 -r
-    echo
-    if [[ ! $REPLY =~ ^[Yy]$ ]]
-    then
-        echo "Abort."
-        [[ "$0" = "$BASH_SOURCE" ]] && exit 1 || return 1
-    else
-        sudo echo "deb ${repo_url} ${ver_name}-backports ${component}" >> /etc/apt/sources.list 2>&1 && \
-        sudo apt update -y
-    fi
-fi
+# backup
+sudo cp /etc/apt/sources.list /etc/apt/sources.list.bak
+sudo cp /etc/apt/preferences /etc/apt/preferences.bak
 
-#install network-manager
-sudo apt install -t ${ver_name}-backports -y ${i_pkg}
+# sources.list generation
+sudo sh -c "cat << EOF > /etc/apt/sources.list
+deb ${repo_url} stable ${component}
+deb-src ${repo_url} stable ${component}
 
-##########################################
-# /etc/apt/sources.list
+deb ${security_url} stable-security ${component}
+deb-src ${security_url} stable-security ${component}
 
-deb http://deb.debian.org/ stable ${component}
-deb-src http://deb.debian.org/ stable ${component}
+deb ${repo_url} stable-updates ${component}
+deb-src ${repo_url} stable-updates ${component}
 
-deb http://security.debian.org/ stable-security ${component}
-deb-src http://security.debian.org/ stable-security ${component}
+deb ${repo_url} unstable ${component}
+deb-src ${repo_url} unstable ${component}
+EOF"
 
-deb http://deb.debian.org/ stable-updates ${component}
-deb-src http://deb.debian.org/ stable-updates ${component}
-
-deb http://deb.debian.org/ unstable ${component}
-deb-src http://deb.debian.org/ unstable ${component}
-
-##########################################
-
-
-
-##########################################
-# /etc/apt/preferences
+# apt preferences setup
+sudo sh -c "cat << EOF > /etc/apt/preferences
 Package: *
 Pin: release a=stable
 Pin-Priority: 500
@@ -63,7 +47,7 @@ Package: *
 Pin: release a=unstable
 Pin-Priority: 100
 
-##########################################
+#######################
 
 Package: linux-image-${_arch}
 Pin: release a=unstable
@@ -76,8 +60,8 @@ Pin-Priority: 1000
 Package: firmware-linux-nonfree
 Pin: release a=unstable
 Pin-Priority: 1000
+EOF"
 
-##########################################
-
+#install packages
 sudo sh -c "apt update -y && apt upgrade -y"
-sudo apt install -y linux-image-${_arch} firmware-linux firmware-linux-nonfree
+sudo apt install -y --install-recommends ${i_pkg}
