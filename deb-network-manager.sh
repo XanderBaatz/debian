@@ -41,4 +41,5 @@ done
 #if network-manager is connected and working, disable /etc/network/interfaces
 if [ $(nmcli -t dev | grep -v "loopback" | grep -q -P "connected"; echo $?) = "0" ]; then
   sudo mv /etc/network/interfaces /etc/network/interfaces.bak
+  sudo systemctl daemon-reload
 fi
