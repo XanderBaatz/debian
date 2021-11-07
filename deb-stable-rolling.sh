@@ -14,7 +14,6 @@ component="main contrib non-free"
 #repository URLs
 repo_url="http://deb.debian.org/"
 security_url="http://security.debian.org/"
-backports_url=""
 
 #kernel and firmware to install from newer repositories
 i_pkg="linux-image-${_arch} firmware-linux firmware-linux-nonfree"
