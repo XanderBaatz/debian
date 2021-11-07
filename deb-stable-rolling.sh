@@ -35,8 +35,8 @@ deb-src ${security_url} stable-security ${component}
 deb ${repo_url} stable-updates ${component}
 deb-src ${repo_url} stable-updates ${component}
 
-deb ${repo_url} unstable ${component}
-deb-src ${repo_url} unstable ${component}
+deb ${repo_url} ./stable-backports ${component}
+deb-src ${repo_url} ./stable-backports ${component}
 EOF"
 
 # apt preferences setup
