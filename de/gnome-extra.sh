@@ -10,7 +10,7 @@ wget -qO- https://rpmfind.net/linux/rpm2html/search.php?query=${popshell}&system
 | grep -Po "(?<=href=')[^']*.rpm" | head -1
 
 #convert rpm package to deb
-sudo alien -d ${popshell}*.rpm && sudo alien -i ${popshell}*.deb
+sudo alien -i ${popshell}*.rpm #sudo alien -d ${popshell}*.rpm && 
 sudo apt autoremove --purge alien -y
 
 #enable installed gnome extensions
