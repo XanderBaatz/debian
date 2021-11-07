@@ -50,17 +50,21 @@ Pin-Priority: 100
 
 #######################
 
-Package: linux-image-${_arch}
+Package: linux-image-* grub* firmware-*
 Pin: release a=unstable
 Pin-Priority: 1000
 
-Package: firmware-linux
-Pin: release a=unstable
-Pin-Priority: 1000
+#Package: linux-image-${_arch}
+#Pin: release a=unstable
+#Pin-Priority: 1000
 
-Package: firmware-linux-nonfree
-Pin: release a=unstable
-Pin-Priority: 1000
+#Package: firmware-linux
+#Pin: release a=unstable
+#Pin-Priority: 1000
+
+#Package: firmware-linux-nonfree
+#Pin: release a=unstable
+#Pin-Priority: 1000
 EOF"
 
 #install packages
