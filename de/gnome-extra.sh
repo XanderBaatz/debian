@@ -19,6 +19,6 @@ sudo alien -i ${gnome_ext}*.rpm #sudo alien -d ${popshell}*.rpm &&
 sudo apt autoremove --purge alien -y
 
 #enable installed gnome extensions
-for e in $(gnome-extensions list); do
-  gnome-extensions enable $e
-done
+#for e in $(gnome-extensions list); do
+#  gnome-extensions enable $e
+#done
