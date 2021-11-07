@@ -26,14 +26,14 @@ sudo cp /etc/apt/sources.list /etc/apt/sources.list.bak
 
 # sources.list generation
 sudo sh -c "cat << EOF > /etc/apt/sources.list
-deb ${repo_url} stable ${component}
-deb-src ${repo_url} stable ${component}
+deb ${repo_url} ./stable ${component}
+deb-src ${repo_url} ./stable ${component}
 
-deb ${security_url} stable-security ${component}
-deb-src ${security_url} stable-security ${component}
+deb ${security_url} ./stable-security ${component}
+deb-src ${security_url} ./stable-security ${component}
 
-deb ${repo_url} stable-updates ${component}
-deb-src ${repo_url} stable-updates ${component}
+deb ${repo_url} ./stable-updates ${component}
+deb-src ${repo_url} ./stable-updates ${component}
 
 deb ${repo_url} ./stable-backports ${component}
 deb-src ${repo_url} ./stable-backports ${component}
