@@ -1,7 +1,10 @@
 #!/bin/sh
 # wget -qO- https://git.io/JPjey | sh
 # unstable: wget -qO- https://git.io/JPjey | REL="unstable" sh
+
+#credits:
 # https://www.linuxcapable.com/how-to-install-or-upgrade-to-linux-kernel-5-14-on-debian-11-bullseye/
+# https://github.com/PapirusDevelopmentTeam/papirus-icon-theme
 
 set -e
 
@@ -22,13 +25,13 @@ component="main contrib non-free"
 #kernel and firmware to install from newer repositories
 i_pkg="linux-image-${_arch} firmware-linux firmware-linux-nonfree"
 
-# backup
+#backup
 sudo cp /etc/apt/sources.list /etc/apt/sources.list.bak
 if [ -e /etc/apt/preferences ]; then
   sudo cp /etc/apt/preferences /etc/apt/preferences.bak
 fi
 
-# sources.list generation
+#sources.list
 sudo sh -c "cat << EOF > /etc/apt/sources.list
 deb ${repo_url} stable ${component}
 deb-src ${repo_url} stable ${component}
@@ -43,7 +46,7 @@ deb ${repo_url} ${REL} ${component}
 deb-src ${repo_url} ${REL} ${component}
 EOF"
 
-# apt preferences setup
+#apt preferences
 sudo sh -c "cat << EOF > /etc/apt/preferences
 Package: *
 Pin: release a=stable
