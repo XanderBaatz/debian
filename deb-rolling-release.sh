@@ -63,6 +63,6 @@ Pin: release a=${REL}
 Pin-Priority: 1000
 EOF"
 
-#install packages
+#install packages (kernel and firmware from chosen release)
 sudo sh -c "apt update -y && apt upgrade -y"
 sudo apt install -y --install-recommends ${i_pkg}
