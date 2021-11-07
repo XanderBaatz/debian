@@ -10,12 +10,12 @@ sudo apt install -y alien
 #wget -N https://rpmfind.net${rpm_get}
 
 #extensions in rpm
-popshell="gnome-shell-extension-pop-shell"
-rpm_get="$(wget -qO- "https://rpmfind.net/linux/rpm2html/search.php?query=${popshell}&system=opensuse&arch=noarch" | grep -Po "(?<=href=')[^']*.rpm" | head -1)"
+gnome_ext="gnome-shell-extension-pop-shell"
+rpm_get="$(wget -qO- "https://rpmfind.net/linux/rpm2html/search.php?query=${gnome_ext}&system=opensuse&arch=noarch" | grep -Po "(?<=href=')[^']*.rpm" | head -1)"
 wget -N https://rpmfind.net${rpm_get}
 
 #convert rpm package to deb
-sudo alien -i ${popshell}*.rpm #sudo alien -d ${popshell}*.rpm && 
+sudo alien -i ${gnome_ext}*.rpm #sudo alien -d ${popshell}*.rpm && 
 sudo apt autoremove --purge alien -y
 
 #enable installed gnome extensions
