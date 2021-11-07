@@ -1,5 +1,5 @@
 #!/bin/sh
-# wget -qO- https://git.io/JPjey | sudo sh
+# wget -qO- https://git.io/JPjey | sh
 # unstable: wget -qO- https://git.io/JPjey | REL="unstable" sh
 # https://www.linuxcapable.com/how-to-install-or-upgrade-to-linux-kernel-5-14-on-debian-11-bullseye/
 
