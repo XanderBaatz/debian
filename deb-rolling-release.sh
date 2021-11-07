@@ -50,7 +50,7 @@ Pin-Priority: 100
 
 #######################
 
-Package: linux-image-* grub* firmware-*
+Package: linux-image-* firmware-*
 Pin: release a=unstable
 Pin-Priority: 1000
 
