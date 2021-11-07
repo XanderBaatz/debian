@@ -12,7 +12,7 @@ ver_name=$(cat /etc/*-release | grep VERSION_CODENAME | cut -f2 -d'=')
 component="main contrib non-free"
 
 #repository URLs
-repo_url="http://deb.debian.org/"
+repo_url="http://deb.debian.org/debian/"
 security_url="http://security.debian.org/"
 
 #kernel and firmware to install from newer repositories
