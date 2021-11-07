@@ -15,7 +15,7 @@ ver_name=$(cat /etc/*-release | grep VERSION_CODENAME | cut -f2 -d'=')
 : "${REL:=testing}"
 
 #repository URLs
-repo_url="http://deb.debian.org/"
+repo_url="http://deb.debian.org/debian"
 security_url="http://security.debian.org/"
 component="main contrib non-free"
 
