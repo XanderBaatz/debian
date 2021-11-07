@@ -1,5 +1,5 @@
 #!/bin/sh
-# wget -qO-  | sudo sh
+# wget -qO- https://git.io/JX4sd | sudo sh
 
 #rpm to deb conversion tools (temporary)
 sudo apt install -y alien
