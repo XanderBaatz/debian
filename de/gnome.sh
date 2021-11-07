@@ -51,6 +51,15 @@ for e in $(gnome-extensions list); do
   gnome-extensions enable $e
 done
 
+
+#extensions
+popshell="gnome-shell-extension-pop-shell"
+wget -qO- https://rpmfind.net/linux/rpm2html/search.php?query=${popshell}&system=opensuse&arch=noarch \
+| grep -Po "(?<=href=')[^']*.rpm" | head -1
+
+
+
+
 echo ""
 echo "Please reboot to finish the installation."
 echo ""
