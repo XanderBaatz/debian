@@ -9,11 +9,14 @@ _arch=$(dpkg --print-architecture)
 dist_name=$(uname -n)
 ver_name=$(cat /etc/*-release | grep VERSION_CODENAME | cut -f2 -d'=')
 #repo_url=$(cat /etc/apt/sources.list | grep -o "deb http[^']\+${dist_name}" | head -1 | cut -f2 -d' ')
-component="main contrib non-free"
+
+#release
+: "${REL:=testing}"
 
 #repository URLs
 repo_url="http://deb.debian.org/"
 security_url="http://security.debian.org/"
+component="main contrib non-free"
 
 #kernel and firmware to install from newer repositories
 i_pkg="linux-image-${_arch} firmware-linux firmware-linux-nonfree"
@@ -34,8 +37,8 @@ deb-src ${security_url} stable-security ${component}
 deb ${repo_url} stable-updates ${component}
 deb-src ${repo_url} stable-updates ${component}
 
-deb ${repo_url} unstable ${component}
-deb-src ${repo_url} unstable ${component}
+deb ${repo_url} ${REL} ${component}
+deb-src ${repo_url} ${REL} ${component}
 EOF"
 
 # apt preferences setup
@@ -45,26 +48,14 @@ Pin: release a=stable
 Pin-Priority: 500
 
 Package: *
-Pin: release a=unstable
+Pin: release a=${REL}
 Pin-Priority: 100
 
 #######################
 
 Package: linux-image-* firmware-*
-Pin: release a=unstable
+Pin: release a=${REL}
 Pin-Priority: 1000
-
-#Package: linux-image-${_arch}
-#Pin: release a=unstable
-#Pin-Priority: 1000
-
-#Package: firmware-linux
-#Pin: release a=unstable
-#Pin-Priority: 1000
-
-#Package: firmware-linux-nonfree
-#Pin: release a=unstable
-#Pin-Priority: 1000
 EOF"
 
 #install packages
