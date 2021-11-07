@@ -5,13 +5,13 @@
 sudo apt install -y alien
 
 #extensions in rpm
-popshell="gnome-shell-extension-pop-shell"
-rpm_get="$(wget -qO- "https://rpmfind.net/linux/rpm2html/search.php?query=${popshell}&system=opensuse&arch=noarch" | grep -Po "(?<=href=')[^']*.rpm" | head -1)"
-wget -N https://rpmfind.net${rpm_get}
+#popshell="gnome-shell-extension-pop-shell"
+#rpm_get="$(wget -qO- "https://rpmfind.net/linux/rpm2html/search.php?query=${popshell}&system=opensuse&arch=noarch" | grep -Po "(?<=href=')[^']*.rpm" | head -1)"
+#wget -N https://rpmfind.net${rpm_get}
 
 #extensions in rpm
 popshell="gnome-shell-extension-pop-shell"
-rpm_get="$(wget -qO- https://rpmfind.net/linux/rpm2html/search.php?query=${popshell}&system=opensuse&arch=noarch | grep -Po "(?<=href=')[^']*.rpm" | head -1)"
+rpm_get="$(wget -qO- "https://rpmfind.net/linux/rpm2html/search.php?query=${popshell}&system=opensuse&arch=noarch" | grep -Po "(?<=href=')[^']*.rpm" | head -1)"
 wget -N https://rpmfind.net${rpm_get}
 
 #convert rpm package to deb
