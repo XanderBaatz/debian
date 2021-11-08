@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/bin/sh
 # wget -qO- https://git.io/JPDf5 | sudo sh
 
 set -e
