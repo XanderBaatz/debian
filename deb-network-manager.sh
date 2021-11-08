@@ -31,7 +31,7 @@ sudo systemctl enable NetworkManager.service
 sudo systemctl restart NetworkManager.service
 
 #reconnect networkmanager
-#sudo nmcli networking off && nmcli networking on
+sudo nmcli networking off && nmcli networking on
 
 #enable networkmanager devices to make use of ifupdown, and fix "connected (externally)"
 #for d in $(nmcli -t dev | awk '/unmanaged/ && !/loopback/' | cut -f1 -d':'); do
