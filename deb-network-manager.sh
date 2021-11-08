@@ -14,24 +14,30 @@ sudo apt install --no-install-recommends --no-install-suggests -y ${i_pkg}
 if [ $(dpkg-query -W -f='${Status}' ${i_pkg} | grep -q -P '^install ok installed$'; echo $?) != "0" ]; then
   echo "Unable to install ${i_pkg} , aborting."
   exit $1
+else
+  sudo mkdir -p /etc/network/interfaces.d
+  sudo mv /etc/network/interfaces /etc/network/interfaces.d/setup
+  sudo sh -c "cat << EOF > /etc/apt/interfaces
+  source-directory /etc/network/interfaces.d/*
+  EOF"
 fi
 
 #let ifupdown manage network-manager
-sudo mv ${nm_conf} ${nm_conf}.bak
-sudo sed '/managed/s/false/true/' ${nm_conf}.bak > ${nm_conf}
+#sudo mv ${nm_conf} ${nm_conf}.bak
+#sudo sed '/managed/s/false/true/' ${nm_conf}.bak > ${nm_conf}
 
 #enable and restart networkmanager service
 sudo systemctl enable NetworkManager.service
 sudo systemctl restart NetworkManager.service
 
 #reconnect networkmanager
-sudo nmcli networking off && nmcli networking on
+#sudo nmcli networking off && nmcli networking on
 
 #enable networkmanager devices to make use of ifupdown, and fix "connected (externally)"
-for d in $(nmcli -t dev | awk '/unmanaged/ && !/loopback/' | cut -f1 -d':'); do
-  sudo nmcli dev set $d managed no;
-  sudo nmcli dev set $d managed yes
-done
+#for d in $(nmcli -t dev | awk '/unmanaged/ && !/loopback/' | cut -f1 -d':'); do
+#  sudo nmcli dev set $d managed no;
+#  sudo nmcli dev set $d managed yes
+#done
 
 #if network-manager is connected and working, remove dhcp
 #if [ $(nmcli -t dev | grep -v "loopback" | grep -q -P "connected"; echo $?) = "0" ]; then
@@ -39,12 +45,7 @@ done
 #fi
 
 #if network-manager is connected and working, disable /etc/network/interfaces
-if [ $(nmcli -t dev | grep -v "loopback" | grep -q -P "connected"; echo $?) = "0" ]; then
-  sudo apt autoremove --purge ifupdown -y
-  #sudo mkdir -p /etc/network/interfaces.d
-  #sudo mv /etc/network/interfaces /etc/network/interfaces.d/setup
-  #sudo sh -c "cat << EOF > /etc/apt/interfaces
-  #source-directory /etc/network/interfaces.d/*
-  #EOF"
-  sudo systemctl restart NetworkManager
-fi
+#if [ $(nmcli -t dev | grep -v "loopback" | grep -q -P "connected"; echo $?) = "0" ]; then
+#  sudo apt autoremove --purge ifupdown -y
+#  sudo systemctl restart NetworkManager
+#fi
