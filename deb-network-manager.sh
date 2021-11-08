@@ -5,7 +5,7 @@ set -e
 
 #variables
 i_pkg="network-manager"
-nm_conf="/etc/NetworkManager/NetworkManager.conf"
+#nm_conf="/etc/NetworkManager/NetworkManager.conf"
 
 #install network-manager
 sudo apt install --no-install-recommends --no-install-suggests -y ${i_pkg}
