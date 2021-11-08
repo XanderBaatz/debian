@@ -16,14 +16,14 @@ if [ $(dpkg-query -W -f='${Status}' ${i_pkg} | grep -q -P '^install ok installed
   exit $1
 else
   #sudo systemctl
-  sudo systemctl disable networking.service
-  sudo systemctl mask networking.service
-  sudo systemctl stop networking.service
-  #sudo mkdir -p /etc/network/interfaces.d
-  #sudo mv /etc/network/interfaces /etc/network/interfaces.d/setup
-  #sudo sh -c "cat << EOF > /etc/apt/interfaces
-  #source-directory /etc/network/interfaces.d/*
-  #EOF"
+  #sudo systemctl disable networking.service
+  #sudo systemctl mask networking.service
+  #sudo systemctl stop networking.service
+  sudo mkdir -p /etc/network/interfaces.d
+  sudo mv /etc/network/interfaces /etc/network/interfaces.d/setup
+  sudo sh -c "cat << EOF > /etc/apt/interfaces
+  source-directory /etc/network/interfaces.d/*
+  EOF"
 fi
 
 #let ifupdown manage network-manager
